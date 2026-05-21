@@ -7,15 +7,15 @@
   <style>
     :root {
       --bg:#f6f7fb; --card:#ffffff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
-      --blue:#2563eb; --green:#16a34a; --yellow:#d97706; --red:#dc2626; --purple:#7c3aed; --dark:#0f172a;
-      --header1:#111827; --header2:#1f2937; --soft:#eef2ff; --table:#f8fafc;
+      --blue:#2563eb; --green:#16a34a; --yellow:#d97706; --orange:#f97316; --red:#dc2626; --purple:#7c3aed; --dark:#0f172a;
+      --header1:#111827; --header2:#1f2937; --soft:#eef2ff; --table:#f8fafc; --filter-bg:#e0f2fe; --filter-border:#38bdf8; --filter-title:#075985;
       --shadow: 0 8px 24px rgba(15,23,42,.08);
       --radius:18px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     [data-theme="dark"] {
       --bg:#0b1220; --card:#111827; --ink:#f8fafc; --muted:#94a3b8; --line:#273244;
-      --header1:#020617; --header2:#111827; --soft:#172554; --table:#0f172a;
+      --header1:#020617; --header2:#111827; --soft:#172554; --table:#0f172a; --filter-bg:#132238; --filter-border:#38bdf8; --filter-title:#bae6fd;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
@@ -32,12 +32,12 @@
     .toolbar{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--radius);padding:14px 16px;margin-bottom:18px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
     .toolbar-text{font-size:13px;color:var(--muted)}
     .btn{border:0;border-radius:12px;padding:11px 15px;font-weight:800;background:var(--blue);color:#fff;cursor:pointer;white-space:nowrap}
-    .btn.secondary{background:#e5e7eb;color:#111827}.btn:active{transform:translateY(1px)}
-    [data-theme="dark"] .btn.secondary{background:#273244;color:#e5e7eb}
+    .btn.secondary{background:#e5e7eb;color:#111827}.btn.reset{background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;box-shadow:0 10px 22px rgba(249,115,22,.22)}.btn.reset:hover{filter:brightness(1.05)}.btn:active{transform:translateY(1px)}
+    [data-theme="dark"] .btn.secondary{background:#273244;color:#e5e7eb}[data-theme="dark"] .btn.reset{background:linear-gradient(135deg,#fb923c,#f97316);color:#111827}
     .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:18px 0}
     .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;overflow:hidden}
     .kpi-label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}.kpi-value{font-size:31px;font-weight:850;margin-top:8px}.kpi-sub{font-size:12px;color:var(--muted);margin-top:4px}
-    .filters{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin:18px 0}.filters select,.filters input{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--card);color:var(--ink);font-size:13px;min-width:0;outline:none}.filters select:focus,.filters input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.13)}
+    .filters{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin:18px 0;padding:16px;border-radius:18px;background:linear-gradient(135deg,var(--filter-bg),rgba(37,99,235,.08));border:1px solid var(--filter-border);box-shadow:0 10px 24px rgba(14,165,233,.12);position:relative}.filters::before{content:'Filters';position:absolute;top:-12px;left:18px;background:var(--bg);border:1px solid var(--filter-border);color:var(--filter-title);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:850;letter-spacing:.05em;text-transform:uppercase}.filters select,.filters input{border:1px solid rgba(14,165,233,.45);border-radius:12px;padding:11px;background:var(--card);color:var(--ink);font-size:13px;min-width:0;outline:none;font-weight:650}.filters select:focus,.filters input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.18)}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.section-title{font-size:18px;margin:0 0 12px}.bar-row{display:grid;grid-template-columns:minmax(120px,160px) 1fr 42px;gap:10px;align-items:center;margin:9px 0;font-size:13px}.bar{height:11px;background:var(--soft);border-radius:999px;overflow:hidden}.bar span{display:block;height:100%;background:var(--blue);border-radius:999px}
     .chart-grid{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:center}.donut-wrap{display:flex;justify-content:center}.donut{width:220px;height:220px}.legend{display:grid;gap:9px}.legend-item{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:13px}.legend-left{display:flex;gap:8px;align-items:center;min-width:0}.dot{width:11px;height:11px;border-radius:999px;flex:0 0 auto}.legend-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.legend-val{font-weight:800}.chart-empty{color:var(--muted);font-size:13px;text-align:center;padding:30px 0}.chart-note{font-size:12px;color:var(--muted);margin-top:10px;text-align:center}
     .pill{display:inline-flex;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:800}.p0,.red{background:#fee2e2;color:#991b1b}.p1,.yellow{background:#fef3c7;color:#92400e}.green{background:#dcfce7;color:#166534}.blue{background:#dbeafe;color:#1e40af}.gray{background:#f3f4f6;color:#374151}.purple{background:#ede9fe;color:#5b21b6}
@@ -57,7 +57,7 @@
   <main>
     <section class="toolbar">
       <div class="toolbar-text"><b>Data source:</b> Google Sheets Action Items CSV is embedded in the dashboard. Update tasks in Google Sheets; this dashboard is read-only.</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" onclick="loadCsv()">Refresh Data</button><button class="btn secondary" onclick="resetFilters()">Reset Filters</button></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" onclick="loadCsv()">Refresh Data</button><button class="btn reset" onclick="resetFilters()">Reset Filters</button></div>
     </section>
 
     <section class="kpis" id="kpiGrid"></section>
@@ -78,7 +78,7 @@
   </main>
   <footer>GIFTTED dashboard is a read-only management view. Operational updates should be made in Google Sheets.</footer>
 <script>
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTCPt4QgKcwgC9qBoVzHrOeWMHGL68zW_6mjFc6RMidpKk8OGoy8vSzZTbmRDatTMvoQLCS_JEFUR3l/pub?gid=256444831&single=true&output=csv";
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSm2HRdaErlbp7bgo7APhnwy6VAYkkkzbTCeG4Qwh5gleIHxL0BbymLm0ruJG0Yqw/pub?gid=515183843&single=true&output=csv";
 const chartColors = ['#2563eb','#16a34a','#d97706','#dc2626','#7c3aed','#0891b2','#db2777','#475569','#65a30d','#ea580c'];
 let rows = []; let filtered = [];
 const fields = { id:'Task ID', workstream:'Workstream', task:'Task Name', owner:'Owner', priority:'Priority', status:'Status', complete:'% Complete', health:'Health', due:'Due Date', blocked:'Blocked?', next:'Next Step', decision:'Decision Needed?', budget:'Budget Needed?', risk:'Risk Level', blocker:'Blocker Description', critical:'Critical Flag' };
